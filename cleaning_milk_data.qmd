@@ -38,7 +38,7 @@ milk_data <- milk_data %>%
 # combining our DV into a single column for each DV
 milk_data <- milk_data |>
   unite(consumer_likelihood, DairyPro_1, DairyCon_1, DairyPic_1, PlantPro_1, PlantCon_1, PlantPic_1, sep = "", remove=F) |>
-  unite(average_purchase, DairyPro_2, DairyCon_2, DairyPic_2, PlantPro_2, PlantCon_2,PlantPic_2, sep = "", remove=F)
+  unite(average_consumption, DairyPro_2, DairyCon_2, DairyPic_2, PlantPro_2, PlantCon_2,PlantPic_2, sep = "", remove=F)
 ```
 
 ```{r}
@@ -122,13 +122,13 @@ milk_data <- milk_data |>
 ```{r}
 #We now have our DV and IV constructed now, but we still have way to many variable, we can select for the ones we want
 milk_df1 <- milk_data|>
-  select(consumer_likelihood, average_purchase, DairyPro_1, DairyCon_1, DairyPic_1, PlantPro_1, PlantCon_1, PlantPic_1, DairyPro_2, DairyCon_2, DairyPic_2, PlantPro_2, PlantCon_2, PlantPic_2, treatment, ad_type, milk_type)
+  select(consumer_likelihood, average_consumption, DairyPro_1, DairyCon_1, DairyPic_1, PlantPro_1, PlantCon_1, PlantPic_1, DairyPro_2, DairyCon_2, DairyPic_2, PlantPro_2, PlantCon_2, PlantPic_2, treatment, ad_type, milk_type)
 ```
 
 ```{r}
 #Our last problem is we have our response variable as the wrong variable type & we need to convert them to numeric. We are now ready to go.
 milk_df1 <- milk_df1|>
-  mutate_at(c('consumer_likelihood', 'average_purchase'), as.numeric)
+  mutate_at(c('consumer_likelihood', 'average_consumption'), as.numeric)
 ```
 
 ```{r}

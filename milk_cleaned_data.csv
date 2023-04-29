@@ -1,4 +1,4 @@
-consumer_likelihood,average_purchase,DairyPro_1,DairyCon_1,DairyPic_1,PlantPro_1,PlantCon_1,PlantPic_1,DairyPro_2,DairyCon_2,DairyPic_2,PlantPro_2,PlantCon_2,PlantPic_2,treatment,ad_type,milk_type
+consumer_likelihood,average_consumption,DairyPro_1,DairyCon_1,DairyPic_1,PlantPro_1,PlantCon_1,PlantPic_1,DairyPro_2,DairyCon_2,DairyPic_2,PlantPro_2,PlantCon_2,PlantPic_2,treatment,ad_type,milk_type
 3,,,,,3,,,,,,,,,PlantPro,Pro,Plant
 4,4,4,,,,,,4,,,,,,DairyPro,Pro,Dairy
 4,5,,,4,,,,,,5,,,,Dairy_control,Control,Dairy
