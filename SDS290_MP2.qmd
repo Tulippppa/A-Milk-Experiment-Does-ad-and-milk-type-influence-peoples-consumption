@@ -70,19 +70,15 @@ milk_means <-
 milk_means
 ```
 
-[**Condition Check 3 Additive Effects**]{.underline}:
+[**Condition Check 3 Additive Effects & Transformation**]{.underline}:
 
-The Tukey Non-Additivity plot model helps us understand the relationship between the affect of both treatments over what we predicted. It also allows us to assess if the affects of treatments are additive or if there is some interaction. We want to relationship between the x-axis and y-axis to have a slope of 0 to indicate there is no relationship. However, the slope is 2.7, so we must transform the data.
+The Tukey Non-Additivity plot model helps us understand the relationship between the affect of both treatments over what we predicted. It also allows us to assess if the affects of treatments are additive or if there is some interaction. We want to relationship between the x-axis and y-axis to have a slope of 0 to indicate there is no relationship. However, because the data violates several assumptions and the slope is 2.7, so we must transform the data.
 
 To diagnose the type of transformation we subtract 1-slope or 1-2.7 which gives the difference of -1.7. Because our P=-1.7, we must use a reciprocals transformation of 1/y.
 
 ```{r, CONDI03, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 TukeyNonaddPlot (average_purchase ~ ad_type + milk_type, data=milk_df1)
 ```
-
-[**Conditions Interpretation & Transformation:**]{.underline}
-
-Our condition assumptions indicate at least one violation, so we must transform our data.
 
 ```{r, INTERPRET, warning=F, message=F, echo=FALSE}
 #LOG TRANSFORMATION
