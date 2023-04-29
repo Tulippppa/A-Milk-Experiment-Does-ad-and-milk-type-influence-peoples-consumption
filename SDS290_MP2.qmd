@@ -26,6 +26,7 @@ library(ggplot2)
 library(Stat2Data)
 
 milk_df1 <- import("milk_cleaned_data.csv")
+
 ```
 
 [**Descriptive Statistics**]{.underline}:
@@ -85,13 +86,12 @@ TukeyNonaddPlot (average_purchase ~ ad_type + milk_type, data=milk_df1)
 log_milk <- 
   milk_df1 |>
   group_by(treatment) |>
-  summarise(log_mean=log(mean(average_purchase)), 
+  summarise(recipricol_mean=1/milk_df1$average_purchase, 
             group_n=n(), 
-            log_sd=log(sd(average_purchase))) 
+            recipricol_sd=log(sd(average_purchase))) 
 #CALCULATING INTERCEPT
 log_quant <- lm(log_sd~log_mean, data=log_milk)
 log_quant
-
 ```
 
 [**Two-Way ANOVA Model**]{.underline}:
