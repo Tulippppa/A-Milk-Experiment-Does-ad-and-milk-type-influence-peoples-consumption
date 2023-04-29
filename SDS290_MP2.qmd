@@ -36,7 +36,7 @@ milk_df1 <- import("milk_cleaned_data.csv")
 milk_summary <- 
   milk_df1 |>
   group_by(treatment) |>
-  summarise(group_mean=mean(average_purchase), 
+  summarise(group_mean=mean(average_consumption), 
             group_n=n(), 
             group_sd=sd(consumer_likelihood),
             group_min= min(consumer_likelihood),
@@ -60,7 +60,7 @@ We will compare the variation in the interquartile ranges of each `treatment`. T
 ```{r, CONDI02, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 #BOX PLOT (constant variance)
 milk_means <-
-  ggplot(data=milk_df1, aes(x=average_purchase, y=treatment)) + 
+  ggplot(data=milk_df1, aes(x=average_consumption, y=treatment)) + 
   geom_boxplot(fill="darkseagreen3") + 
   stat_summary(fun="mean") + 
   labs(title ="Consumer Likelihood Box Plot",
@@ -78,7 +78,7 @@ The Tukey Non-Additivity plot model helps us understand the relationship between
 To diagnose the type of transformation we subtract 1-slope or 1-2.7 which gives the difference of -1.7. Because our P=-1.7, we must use a reciprocals transformation of 1/y.
 
 ```{r, CONDI03, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
-TukeyNonaddPlot (average_purchase ~ ad_type + milk_type, data=milk_df1)
+TukeyNonaddPlot (average_consumption ~ ad_type + milk_type, data=milk_df1)
 ```
 
 ```{r, INTERPRET, warning=F, message=F, echo=FALSE}
@@ -86,9 +86,7 @@ TukeyNonaddPlot (average_purchase ~ ad_type + milk_type, data=milk_df1)
 log_milk <- 
   milk_df1 |>
   group_by(treatment) |>
-  summarise(recipricol_mean=1/milk_df1$average_purchase, 
-            group_n=n(), 
-            recipricol_sd=log(sd(average_purchase))) 
+  summarise(1/milk_df1$average_consumption)
 #CALCULATING INTERCEPT
 log_quant <- lm(log_sd~log_mean, data=log_milk)
 log_quant
@@ -100,7 +98,7 @@ log_quant
 # milk_anova <- aov(consumer_likelihood~treatment, data=milk_df1) 
 # summary(milk_anova) 
 
-milk_anova2 <- aov(consumer_likelihood~ad_type+milk_type, data=milk_df1) 
+milk_anova2 <- aov(average_consumption~ad_type+milk_type, data=milk_df1) 
 summary(milk_anova2) 
 ```
 
@@ -108,7 +106,7 @@ summary(milk_anova2)
 
 ```{r, MOD02, warning=F, message=F, echo=FALSE}
 
-interaction <- aov(consumer_likelihood~ad_type*milk_type, data=milk_df1) 
+interaction <- aov(average_consumption~ad_type*milk_type, data=milk_df1) 
 summary(interaction) 
 ```
 
