@@ -82,14 +82,16 @@ TukeyNonaddPlot (average_consumption ~ ad_type + milk_type, data=milk_df1)
 ```
 
 ```{r, INTERPRET, warning=F, message=F, echo=FALSE}
-#LOG TRANSFORMATION
-log_milk <- 
-  milk_df1 |>
-  group_by(treatment) |>
-  summarise(1/milk_df1$average_consumption)
+#RECIPROCAL TRANSFORMATION
+#recip_milk <- 
+#  milk_df1 |>
+#  group_by(treatment) |>
+#  summarise(1/milk_df1$average_consumption)
+
+milk_df1$average_consumption <- (1/milk_df1$average_consumption)
 #CALCULATING INTERCEPT
-log_quant <- lm(log_sd~log_mean, data=log_milk)
-log_quant
+#recip_quant <- lm(log_sd~log_mean, data=log_milk)
+#recip_quant
 ```
 
 [**Two-Way ANOVA Model**]{.underline}:
@@ -98,6 +100,7 @@ log_quant
 # milk_anova <- aov(consumer_likelihood~treatment, data=milk_df1) 
 # summary(milk_anova) 
 
+## DOES THIS MEAN WE HAVE TO CHANGE OUR ANOVA SO WE CAN USE THE RECIP TRANSFORMED DATA SO WE HAVE TO RELOAD ALL PLOTS AND ANOVA AND UPDATE OUR SLIDES
 milk_anova2 <- aov(average_consumption~ad_type+milk_type, data=milk_df1) 
 summary(milk_anova2) 
 ```
