@@ -106,39 +106,14 @@ summary(milk_anova)
 
 [**Independent residuals:**]{.underline}
 
-```{r, RESIDCHECK01, warning=F, message=F, echo=FALSE}
-resid <-  resid(milk_anova)
-Model <- data.frame(Fitted = fitted(milk_anova), 
-                    Residuals = resid(milk_anova), 
-                    Treatment = milk_df1$treatment,
-                    Observed= milk_df1$average_consumption_transformed)
+```{r, QQPLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+
+plot(milk_anova, which = 2)
+
 ```
 
-```{r, RESIDPLOT01, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
-#RESID PLOT
-milk_resid <- 
-  ggplot(Model, aes(x = Fitted, y = Residuals)) +
-  geom_point() +
-  geom_hline(yintercept = 0) + 
-  labs(title ="Fitted vs Residuals Residual Plot",
-      subtitle= "Assessing Distribution by Treatment",
-      caption ="source: Qualtrics Milk Data") 
-milk_resid
-```
-
-[**Normally Distributed Residuals**:]{.underline}
-
-In our density plot, we view the distribution of the `Consumer Likelihood` at the different levels of the `Milk (ad type and sentiment)` treatment. The data is not normally distributed nor unimodal among all levels. While the data distributions for the `Plant_control` and `PlantPro(+)` are normal, the other distributions vary. For example, `DairyCon` and `Plant_control` is bimodal, `Dairy control` and `DairyPro` is right-skewed. Therefore, we have violated the condition about constant variance for our ANOVA model.
-
-```{r, RESIDCHECK02, warning=F, message=F, echo=FALSE}
-#RESID PLOT2
-milk_resid2 <-
-  ggplot(data=Model, aes(x=Residuals, color=Treatment)) + 
-  geom_density() + 
-  labs(title ="Treatment vs Residuals Density Plot",
-      subtitle= "Assessing Distribution by Treatment",
-      caption ="source: Qualtrics Milk Data") 
-milk_resid2
+```{r, RESVFIT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+plot(milk_anova, which = 1)
 ```
 
 [**Levene's Test:**]{.underline}
