@@ -146,7 +146,6 @@ milk_bonf
 
 [**R-Squared:**]{.underline}
 
-```{r, RSQUARED, warning=F, message=F, echo=FALSE}
-```
+we can get our r-squared from our anova
 
 ## Conclusion
