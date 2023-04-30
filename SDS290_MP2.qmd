@@ -38,9 +38,9 @@ milk_summary <-
   group_by(treatment) |>
   summarise(group_mean=mean(average_consumption), 
             group_n=n(), 
-            group_sd=sd(consumer_likelihood),
-            group_min= min(consumer_likelihood),
-            group_max= max(consumer_likelihood))  
+            group_sd=sd(average_consumption),
+            group_min= min(average_consumption),
+            group_max= max(average_consumption))  
 milk_summary
 ```
 
@@ -83,78 +83,41 @@ TukeyNonaddPlot (average_consumption ~ ad_type + milk_type, data=milk_df1)
 
 ```{r, INTERPRET, warning=F, message=F, echo=FALSE}
 #RECIPROCAL TRANSFORMATION
-#recip_milk <- 
-#  milk_df1 |>
-#  group_by(treatment) |>
-#  summarise(1/milk_df1$average_consumption)
 
-milk_df1$average_consumption <- (1/milk_df1$average_consumption)
-#CALCULATING INTERCEPT
-#recip_quant <- lm(log_sd~log_mean, data=log_milk)
-#recip_quant
+milk_df1$average_consumption_transformed <- (1/milk_df1$average_consumption)
+
+milk_summary_transformed <- 
+  milk_df1 |>
+  group_by(treatment) |>
+  summarise(group_mean=mean(average_consumption_transformed ), 
+            group_n=n(), 
+            group_sd=sd(average_consumption_transformed ),
+            group_min= min(average_consumption_transformed ),
+            group_max= max(average_consumption_transformed ))  
+milk_summary
 ```
 
 [**Two-Way ANOVA Model**]{.underline}:
 
 ```{r, MOD01, warning=F, message=F, echo=FALSE}
-# milk_anova <- aov(consumer_likelihood~treatment, data=milk_df1) 
-# summary(milk_anova) 
-
-## DOES THIS MEAN WE HAVE TO CHANGE OUR ANOVA SO WE CAN USE THE RECIP TRANSFORMED DATA SO WE HAVE TO RELOAD ALL PLOTS AND ANOVA AND UPDATE OUR SLIDES
-milk_anova2 <- aov(average_consumption~ad_type+milk_type, data=milk_df1) 
-summary(milk_anova2) 
-```
-
-[**Interaction Model**]{.underline}:
-
-```{r, MOD02, warning=F, message=F, echo=FALSE}
-
-interaction <- aov(average_consumption~ad_type*milk_type, data=milk_df1) 
-summary(interaction) 
-```
-
-[**Pairwise Comparison**]{.underline}:
-
-```{r, PAIRWISE, warning=F, message=F, echo=FALSE}
-#FISHERSLSD
-milk_lsd <-
-  pairw.anova(milk_df1$ad_type, 
-              milk_df1$milk_type,
-              method="lsd", conf.level=.95)
-milk_lsd
-
-#TUKEYHSD()
-milk_tukey <- TukeyHSD(milk_anova2)
-milk_tukey
-
-#BONFERONNI
-milk_bonf <- 
-  bonfCI(milk_df1$consumer_likelihood, 
-         milk_df1$ad_type, milk_df1$milk_type, 
-         conf.level = 0.95)
-milk_bonf
+milk_anova <- aov(average_consumption_transformed~ad_type+milk_type, data=milk_df1) 
+summary(milk_anova) 
 ```
 
 [**Independent residuals:**]{.underline}
 
 ```{r, RESIDCHECK01, warning=F, message=F, echo=FALSE}
-# resid <-  resid(milk_anova)
-# Model <- data.frame(Fitted = fitted(milk_anova), 
-#                     Residuals = resid(milk_anova), 
-#                     Treatment = milk_df1$treatment,
-#                     Observed= milk_df1$consumer_likelihood)
-
-resid2 <-  resid(milk_anova2)
-Model2 <- data.frame(Fitted = fitted(milk_anova2), 
-                    Residuals = resid(milk_anova2), 
+resid <-  resid(milk_anova)
+Model <- data.frame(Fitted = fitted(milk_anova), 
+                    Residuals = resid(milk_anova), 
                     Treatment = milk_df1$treatment,
-                    Observed= milk_df1$consumer_likelihood)
+                    Observed= milk_df1$average_consumption_transformed)
 ```
 
 ```{r, RESIDPLOT01, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 #RESID PLOT
 milk_resid <- 
-  ggplot(Model2, aes(x = Fitted, y = Residuals)) +
+  ggplot(Model, aes(x = Fitted, y = Residuals)) +
   geom_point() +
   geom_hline(yintercept = 0) + 
   labs(title ="Fitted vs Residuals Residual Plot",
@@ -170,7 +133,7 @@ In our density plot, we view the distribution of the `Consumer Likelihood` at th
 ```{r, RESIDCHECK02, warning=F, message=F, echo=FALSE}
 #RESID PLOT2
 milk_resid2 <-
-  ggplot(data=Model2, aes(x=Residuals, color=Treatment)) + 
+  ggplot(data=Model, aes(x=Residuals, color=Treatment)) + 
   geom_density() + 
   labs(title ="Treatment vs Residuals Density Plot",
       subtitle= "Assessing Distribution by Treatment",
@@ -181,12 +144,29 @@ milk_resid2
 [**Levene's Test:**]{.underline}
 
 ```{r, LEVENET, warning=F, message=F, echo=FALSE}
-leveneTest(consumer_likelihood~treatment, data=milk_df1)
+leveneTest(average_consumption_transformed~treatment, data=milk_df1)
 ```
 
 [**Confidence Intervals & Effect Size**]{.underline}:
 
 ```{r, CI, warning=F, message=F, echo=FALSE}
+#FISHERSLSD
+milk_lsd <-
+  pairw.anova(milk_df1$ad_type, 
+              milk_df1$milk_type,
+              method="lsd", conf.level=.95)
+milk_lsd
+
+#TUKEYHSD()
+milk_tukey <- TukeyHSD(milk_anova)
+milk_tukey
+
+#BONFERONNI
+milk_bonf <- 
+  bonfCI(milk_df1$average_consumption_transformed, 
+         milk_df1$ad_type, milk_df1$milk_type, 
+         conf.level = 0.95)
+milk_bonf
 ```
 
 [**R-Squared:**]{.underline}
