@@ -116,13 +116,17 @@ milk_data$milk_type <- as.factor(milk_data$milk_type)
 milk_data <- milk_data |>
   drop_na("treatment") |>
   drop_na("ad_type") |>
-  drop_na("milk_type")
+  drop_na("milk_type") 
+
+
 ```
 
 ```{r}
 #We now have our DV and IV constructed now, but we still have way to many variable, we can select for the ones we want
 milk_df1 <- milk_data|>
-  select(consumer_likelihood, average_consumption, DairyPro_1, DairyCon_1, DairyPic_1, PlantPro_1, PlantCon_1, PlantPic_1, DairyPro_2, DairyCon_2, DairyPic_2, PlantPro_2, PlantCon_2, PlantPic_2, treatment, ad_type, milk_type)
+  select(consumer_likelihood, average_consumption, DairyPro_1, DairyCon_1, DairyPic_1, PlantPro_1, PlantCon_1, PlantPic_1, DairyPro_2, DairyCon_2, DairyPic_2, PlantPro_2, PlantCon_2, PlantPic_2, treatment, ad_type, milk_type) |>
+  drop_na("average_consumption")  |>
+  filter(average_consumption>=1)
 ```
 
 ```{r}
