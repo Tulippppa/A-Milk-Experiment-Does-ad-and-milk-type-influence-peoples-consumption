@@ -52,16 +52,17 @@ milk_summary <-
             group_min= min(average_consumption),
             group_max= max(average_consumption))  
 milk_summary
+## DO WE NEED THIS IF WE ARE DOING LEVENS TEST? BUT HERE IT SAYS SD ARE TOO DIFFERENT BUT LEVENS SAYS WE FAIL TO REJECT NULL HYPO
 ```
 
 [**Condition Check 1 Variability & Standard Deviation**]{.underline}:
 
-Our largest standard deviation \[`Plant Control & Dairy Control`\] 1.38 divided by the smallest standard deviation \[`DairyCon(-)`\] 1.05 equals 1.31. Their quotient is smaller than 2, so we do not violate the condition about constant variance for our ANOVA model.
-
 ```{r, CONDI01, warning=F, message=F, echo=FALSE}
 #STANDARD DEVIATION (constant variance)
-1.38/1.05
+1.75/0.577
 ```
+
+Our largest standard deviation \[Dairy_control group\] 1.75 divided by the smallest standard deviation \[PlantPro group\] 0.577 equals 3.032. Their quotient is larger than 2, so we violate the condition about constant variance for our ANOVA model.
 
 [**Condition Check 2 Symmetrical Distribution around Group Means**]{.underline}:
 
@@ -79,7 +80,11 @@ milk_means <-
   xlab("Average Consumption") +
   ylab ("Treatment") + coord_flip()
 milk_means
+
+
 ```
+
+The box-plot above shows us the distribution of the average consumption on the different treatments. By looking at the plot, we can see that the constant variance condition is violated. We see that we do not have constant variance across groups and that the spread is not normal. However, checking conditions with visualizations can be tricky, so we can refer to levene's test to check our constant variance condition.
 
 [**Levene's Test:**]{.underline}
 
@@ -87,30 +92,28 @@ milk_means
 leveneTest(average_consumption~treatment, data=milk_df1)
 ```
 
-We conducted Levene's test to have more proof that we do not have constant varience
+After condicting Levene's test of homogeneity of variance, we see that our p-value of 0.5326 is greater than 0.05. This means that we do not have statistically significant evidence that we have different variances.
 
 [**Condition Check 3 Additive Effects & Transformation**]{.underline}:
-
-The Tukey Non-Additivity plot model helps us understand the relationship between the affect of both treatments over what we predicted. It also allows us to assess if the affects of treatments are additive or if there is some interaction. We want to relationship between the x-axis and y-axis to have a slope of 0 to indicate there is no relationship. However, because the data violates several assumptions and the slope is 2.7, so we must transform the data.
-
-To diagnose the type of transformation we subtract 1-slope or 1-2.7 which gives the difference of -1.7. Because our P=-1.7, we must use a reciprocals transformation of 1/y.
 
 ```{r, CONDI03, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 TukeyNonaddPlot (average_consumption ~ ad_type + milk_type, data=milk_df1)
 ```
 
+The Tukey Non-Additivity plot model helps us understand the relationship between the affect of both treatments over what we predicted. It also allows us to assess if the affects of treatments are additive or if there is some interaction. We want to relationship between the x-axis and y-axis to have a slope of 0 to indicate there is no relationship. However, because the data violates several assumptions and the slope is 2.7, so we must transform the data.
+
+To diagnose the type of transformation we subtract 1-slope or 1-2.7 which gives the difference of -1.7. Because our P=-1.7, we must use a reciprocals transformation of 1/y.
+
 ```{r, INTERPRET, warning=F, message=F, echo=FALSE}
 #RECIPROCAL TRANSFORMATION
-
 milk_df1$average_consumption_transformed <- (1/milk_df1$average_consumption)
-
 ```
 
 ```{r, TUKEY2, warning=F, message=F, echo=FALSE}
 TukeyNonaddPlot (average_consumption_transformed ~ ad_type + milk_type, data=milk_df1)
 ```
 
-Although we are getting close to a slope of 0, we are not there yet, meaning an interaction might still be better for this model.
+After transforming our data, we see that although we are getting closer to that slope of 0, we are not quite there yet. This means that an interaction might still be better for this model.
 
 [**Two-Way ANOVA Model**]{.underline}:
 
@@ -119,15 +122,25 @@ milk_anova <- aov(average_consumption~ad_type*milk_type, data=milk_df1)
 summary(milk_anova) 
 ```
 
-[**Independent residuals:**]{.underline}
+The interaction model above shows us whether we have main effects for ad type, milk type, and if we have an interaction present.
 
-```{r, QQPLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
-plot(milk_anova, which = 2)
-```
+Because our p-value for ad_type is 0.609 (greater than 0.05), we do not have statistically significant evidence that average consumption is different based on ad type. We do not have a main effect for ad type.
+
+Because our p-value for milk_type is 0.686 (greater than 0.05), we do not have statistically significant evidence that average consumption is different based on milk type. We do not have a main effect for milk type.
+
+[**Independent residuals:**]{.underline}
 
 ```{r, RESVFIT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 plot(milk_anova, which = 1)
 ```
+
+The residuals versus fitted plot can help us asses two patterns: non-linearity and non-constant spread. Because we see our residuals evenly spread out, we can say that our spread is constant. However, because our line does not fall on zero, non linearity is present here.
+
+```{r, RESVFIT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+plot(milk_anova, which = 2)
+```
+
+We can use this normal qquantile plot compares the standardized observed residuals with theoretical values from a normal distribution. This plot can help us determine whether our distribution is normal. Because we see that the residuals do not fall on the line, our distribution is not normal.
 
 [**Confidence Intervals & Effect Size**]{.underline}:
 
@@ -155,6 +168,11 @@ milk_bonf <-
          conf.level = 0.95)
 
 milk_bonf
+```
+
+```{r, EFFECTSIZE, warning=F, message=F, echo=FALSE}
+#TREATMENT GROUP STATS
+milk_summary
 ```
 
 [**R-Squared:**]{.underline}
