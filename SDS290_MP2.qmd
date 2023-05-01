@@ -75,6 +75,12 @@ milk_means <-
 milk_means
 ```
 
+[**Levene's Test:**]{.underline}
+
+```{r, LEVENET, warning=F, message=F, echo=FALSE}
+leveneTest(average_consumption_transformed~treatment, data=milk_df1)
+```
+
 [**Condition Check 3 Additive Effects & Transformation**]{.underline}:
 
 The Tukey Non-Additivity plot model helps us understand the relationship between the affect of both treatments over what we predicted. It also allows us to assess if the affects of treatments are additive or if there is some interaction. We want to relationship between the x-axis and y-axis to have a slope of 0 to indicate there is no relationship. However, because the data violates several assumptions and the slope is 2.7, so we must transform the data.
@@ -118,12 +124,6 @@ plot(milk_anova, which = 2)
 
 ```{r, RESVFIT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 plot(milk_anova, which = 1)
-```
-
-[**Levene's Test:**]{.underline}
-
-```{r, LEVENET, warning=F, message=F, echo=FALSE}
-leveneTest(average_consumption_transformed~treatment, data=milk_df1)
 ```
 
 [**Confidence Intervals & Effect Size**]{.underline}:
