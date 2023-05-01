@@ -13,6 +13,12 @@ indent: true
 
 ## Methodology
 
+Our project's experimental units consisted of thirty-five Smith College students. We collected participants using a convenience sample, as those who took the survey came majority from our Research Design and Analysis class, other classes, and some of our student organizations on campus. Because the respondents came from a very specific demographic, we cannot generalize results to the Smith population. If random sampling was used, then, we would have been able to generalize to Smithies. 
+
+However, we used random assignment when assigning the treatments to our participants, making our project an experiment. Our two treatments were Milk Type and Advertisement type. Participants were first assigned to either receive a dairy or plant based milk photo. Then, random assignment was used again and participants either received positive remarks with their assigned photo, negative remarks, or no remarks at all and just the photo (which acted as the control). 
+
+The independent variables (experimental factors) in our study were the two treatments, milk type and advertisement type which were both categorical. The dependent variable was average consumption, which is continuous. After seeing their treatment, participants rated on an ordinal scale from 1-5 (1 being least likely, 5 being most likely) on how many times a week they consume the type of milk they were shown. This study is interested in how different ad contents (milk v non dairy) and sentiment types (positive, negative, neutral ad ) influence people\'s perception of the dairy industry.
+
 ## Results
 
 [**Load Data:**]{.underline}
