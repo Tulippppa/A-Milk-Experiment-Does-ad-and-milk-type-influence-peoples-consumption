@@ -65,21 +65,23 @@ We will compare the variation in the interquartile ranges of each `treatment`. T
 #BOX PLOT (constant variance)
 milk_means <-
   ggplot(data=milk_df1, aes(x=average_consumption, y=treatment)) + 
-  geom_boxplot(fill="darkseagreen3") + 
+  geom_boxplot(fill="steelblue3") + 
   stat_summary(fun="mean") + 
   labs(title ="Consumer Likelihood Box Plot",
       subtitle= "Assessing Distribution by Treatment",
       caption ="source: Qualtrics Milk Data") +
-  xlab("Treatment") +
-  ylab ("Average Purchase") + coord_flip()
+  xlab("Average Consumption") +
+  ylab ("Treatment") + coord_flip()
 milk_means
 ```
 
 [**Levene's Test:**]{.underline}
 
 ```{r, LEVENET, warning=F, message=F, echo=FALSE}
-leveneTest(average_consumption_transformed~treatment, data=milk_df1)
+leveneTest(average_consumption~treatment, data=milk_df1)
 ```
+
+We conducted Levene's test to have more proof that we do not have constant varience
 
 [**Condition Check 3 Additive Effects & Transformation**]{.underline}:
 
@@ -96,30 +98,25 @@ TukeyNonaddPlot (average_consumption ~ ad_type + milk_type, data=milk_df1)
 
 milk_df1$average_consumption_transformed <- (1/milk_df1$average_consumption)
 
-milk_summary_transformed <- 
-  milk_df1 |>
-  group_by(treatment) |>
-  summarise(group_mean=mean(average_consumption_transformed ), 
-            group_n=n(), 
-            group_sd=sd(average_consumption_transformed ),
-            group_min= min(average_consumption_transformed ),
-            group_max= max(average_consumption_transformed ))  
-milk_summary
 ```
+
+```{r, TUKEY2, warning=F, message=F, echo=FALSE}
+TukeyNonaddPlot (average_consumption_transformed ~ ad_type + milk_type, data=milk_df1)
+```
+
+Although we are getting close to a slope of 0, we are not there yet, meaning an interaction might still be better for this model.
 
 [**Two-Way ANOVA Model**]{.underline}:
 
 ```{r, MOD01, warning=F, message=F, echo=FALSE}
-milk_anova <- aov(average_consumption_transformed~ad_type+milk_type, data=milk_df1) 
+milk_anova <- aov(average_consumption~ad_type*milk_type, data=milk_df1) 
 summary(milk_anova) 
 ```
 
 [**Independent residuals:**]{.underline}
 
 ```{r, QQPLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
-
 plot(milk_anova, which = 2)
-
 ```
 
 ```{r, RESVFIT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
@@ -137,7 +134,7 @@ milk_tukey
 ```{r, LSD, warning=F, message=F, echo=FALSE}
 #FISHERSLSD
 milk_lsd <-
-  pairw.anova(milk_df1$average_consumption_transformed, 
+  pairw.anova(milk_df1$average_consumption, 
               milk_df1$treatment,
               method="lsd", 
               conf.level=.95)
@@ -147,7 +144,7 @@ milk_lsd
 ```{r, BON, warning=F, message=F, echo=FALSE}
 #BONFERONNI
 milk_bonf <- 
-  bonfCI(milk_df1$average_consumption_transformed, 
+  bonfCI(milk_df1$average_consumption, 
          milk_df1$treatment,
          conf.level = 0.95)
 
