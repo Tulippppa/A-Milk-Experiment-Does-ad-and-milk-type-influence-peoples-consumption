@@ -154,7 +154,8 @@ milk_tukey
 #FISHERSLSD
 milk_lsd <-
   pairw.anova(milk_df1$average_consumption, 
-              milk_df1$treatment,
+              interaction(milk_df1$milk_type,milk_df1$ad_type),
+            #  milk_df1$treatment,
               method="lsd", 
               conf.level=.95)
 milk_lsd
@@ -163,8 +164,8 @@ milk_lsd
 ```{r, BON, warning=F, message=F, echo=FALSE}
 #BONFERONNI
 milk_bonf <- 
-  bonfCI(milk_df1$average_consumption, 
-         milk_df1$treatment,
+  bonfCI(milk_df1$average_consumption, interaction(milk_df1$milk_type,milk_df1$ad_type),
+       #  milk_df1$treatment,
          conf.level = 0.95)
 
 milk_bonf
