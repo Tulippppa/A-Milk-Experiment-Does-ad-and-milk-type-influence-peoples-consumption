@@ -66,7 +66,7 @@ The box-plot above shows us the distribution of the average consumption on the d
 leveneTest(average_consumption~treatment, data=milk_df1)
 ```
 
-After condicting Levene's test of homogeneity of variance, we see that our p-value of 0.5326 is greater than 0.05. This means that we do not have statistically significant evidence that we have different variances.
+After condicting Levene's test of homogeneity of variance, we see that our p-value of 0.5326 is greater than 0.05. This means that we do not have statistically significant evidence that we have different variances, therefor our condition is not violated.
 
 [**Condition Check 2 Additive Effects & Transformation**]{.underline}:
 
@@ -102,6 +102,8 @@ Because our p-value for ad_type is 0.609 (greater than 0.05), we do not have sta
 
 Because our p-value for milk_type is 0.686 (greater than 0.05), we do not have statistically significant evidence that average consumption is different based on milk type. We do not have a main effect for milk type.
 
+When looking at our interaction effect, we see a p-value of 0.431. Because out p-value is greater than 0.431, we do not have statistically significant evidence that the effect of ad type is different based on the effect of milk type. We do not have statistically significant evidence that an interaction exists.
+
 [**Independent residuals:**]{.underline}
 
 ```{r, RESVFIT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
@@ -118,12 +120,6 @@ We can use this normal quantile plot compares the standardized observed residual
 
 [**Confidence Intervals & Effect Size**]{.underline}:
 
-```{r, TUKEY, warning=F, message=F, echo=FALSE}
-#TUKEYHSD()
-milk_tukey <- TukeyHSD(milk_anova)
-milk_tukey
-```
-
 ```{r, LSD, warning=F, message=F, echo=FALSE}
 #FISHERSLSD
 milk_lsd <-
@@ -134,6 +130,10 @@ milk_lsd <-
 milk_lsd
 ```
 
+When conducting a pairwise comparison, a fishers lsd looks at the individual false alarm rate. This means it looks at the chance of a Type 1 error for a single test. Because our alpha level is 0.05, this means that for every error, those 0.05 error rates add up. The Fishers LSD is the least conservative, meaning it is likely to reject the null hypothesis that the means of average consumption are the same.
+
+When looking at our pairwise comparisons, we see that all of the p-values are larger than 0.05. This means we do not have statistically significant evidence that the pairwise comparisons between the treatments are different.
+
 ```{r, BON, warning=F, message=F, echo=FALSE}
 #BONFERONNI
 milk_bonf <- 
@@ -143,6 +143,18 @@ milk_bonf <-
 
 milk_bonf
 ```
+
+The Bonferroni confidence intervals focuses on family wise fale alarm rate. Meaning we look at the 0.05 error on *all* the tests we conduct. This approach is the most conservative and least likely to reject the null hypothesis.
+
+Again, based on all of our pairwise comparisons, all of the p-values are larger than 0.05. This means we do not have statistically significant evidence that the pairwise comparisons between the treatments are different.
+
+```{r, TUKEY, warning=F, message=F, echo=FALSE}
+#TUKEYHSD()
+milk_tukey <- TukeyHSD(milk_anova)
+milk_tukey
+```
+
+The TukeyHSD is the last pairwise comparison test that we will look at. It is somewhere in between the fishers and bonferonni. Similarly, when looking at our pairwise comparisons, we see that all of the p-values are larger than 0.05. We do not have statistically significant evidence that the pairwise comparisons between the treatments are different.
 
 ```{r, EFFECTSIZE, warning=F, message=F, echo=FALSE}
 #TREATMENT GROUP STATS
