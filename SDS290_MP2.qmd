@@ -39,16 +39,7 @@ milk_df1$ad_type <- as.factor(milk_df1$ad_type)
 milk_df1$treatment <- as.factor(milk_df1$treatment)
 ```
 
-[**Condition Check 1 Variability & Standard Deviation**]{.underline}:
-
-```{r, CONDI01, warning=F, message=F, echo=FALSE}
-#STANDARD DEVIATION (constant variance)
-1.75/0.577
-```
-
-Our largest standard deviation \[Dairy_control group\] 1.75 divided by the smallest standard deviation \[PlantPro group\] 0.577 equals 3.032. Their quotient is larger than 2, so we violate the condition about constant variance for our ANOVA model.
-
-[**Condition Check 2 Symmetrical Distribution around Group Means**]{.underline}:
+[**Condition Check 1 Symmetrical Distribution around Group Means**]{.underline}:
 
 We will compare the variation in the interquartile ranges of each `treatment`. This plot demonstrates that our distribution across the six groups are not equally distributed and violate our constant variance condition.
 
@@ -77,7 +68,7 @@ leveneTest(average_consumption~treatment, data=milk_df1)
 
 After condicting Levene's test of homogeneity of variance, we see that our p-value of 0.5326 is greater than 0.05. This means that we do not have statistically significant evidence that we have different variances.
 
-[**Condition Check 3 Additive Effects & Transformation**]{.underline}:
+[**Condition Check 2 Additive Effects & Transformation**]{.underline}:
 
 ```{r, CONDI03, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 TukeyNonaddPlot (average_consumption ~ ad_type + milk_type, data=milk_df1)
