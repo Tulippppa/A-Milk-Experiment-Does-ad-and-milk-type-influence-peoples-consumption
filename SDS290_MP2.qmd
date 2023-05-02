@@ -155,10 +155,31 @@ milk_summary <-
             group_min= min(average_consumption),
             group_max= max(average_consumption))  
 milk_summary
+
+effect_size<- 1.71
 ```
+
+The output above shows us descriptive statistics of our milk data. We can use it to calculate our effect size. To calculate effect size, we \| 1.71-1.5\|/ rad(1.6888) = 0.16. This represents a trivial effect.
 
 [**R-Squared:**]{.underline}
 
-we can get our r-squared from our anova
+```{r, RSQUARED, warning=F, message=F, echo=FALSE}
+summary(milk_anova) 
+r_ad<- 1.70/48.98
+r_milk<-0.28/48.98
+r_interaction<-2.92/48.98 
+
+r_ad
+r_milk
+r_interaction
+```
+
+Here, we see our different R squared values. An R squared value tells us the proportion of the variance in the dependent variable that can be explained by our independent variable. It tells us how well our data fits the model.
+
+So for our model, the ad type explains 3.47% of the variability in the participants average consumption of dairy or plant based products.
+
+The type of milk (dairy or oat) explains 0.57% of the variability in the participants average consumption of dairy or plant based products.
+
+The interaction explains 5.96% of the variability in the participants average consumption of dairy or plant based products.
 
 ## Conclusion
