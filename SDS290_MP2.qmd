@@ -114,7 +114,7 @@ The residuals versus fitted plot can help us asses two patterns: non-linearity a
 plot(milk_anova, which = 2)
 ```
 
-We can use this normal qquantile plot compares the standardized observed residuals with theoretical values from a normal distribution. This plot can help us determine whether our distribution is normal. Because we see that the residuals do not fall on the line, our distribution is not normal.
+We can use this normal quantile plot compares the standardized observed residuals with theoretical values from a normal distribution. This plot can help us determine whether our distribution is normal. Because we see that the residuals do not fall on the line, our distribution is not normal.
 
 [**Confidence Intervals & Effect Size**]{.underline}:
 
