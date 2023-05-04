@@ -62,19 +62,19 @@ milk_data$PlantPic_2 <- as.numeric(milk_data$PlantPic_2)
 
 ```{r}
 # removing NA values  and putting them in the treatment of both treatments together
-milk_data$treatment[!is.na(milk_data$DairyPro_1)] <- "DairyPro"
-milk_data$treatment[!is.na(milk_data$DairyCon_1)] <- "DairyCon"
-milk_data$treatment[!is.na(milk_data$DairyPic_1)] <- "Dairy_control"
-milk_data$treatment[!is.na(milk_data$PlantPro_1)] <- "PlantPro"
-milk_data$treatment[!is.na(milk_data$PlantCon_1)] <- "PlantCon"
-milk_data$treatment[!is.na(milk_data$PlantPic_1)] <- "Plant_control"
+milk_data$treatment[!is.na(milk_data$DairyPro_1)] <- "Dairy_Pos"
+milk_data$treatment[!is.na(milk_data$DairyCon_1)] <- "Dairy_Neg"
+milk_data$treatment[!is.na(milk_data$DairyPic_1)] <- "Dairy_Control"
+milk_data$treatment[!is.na(milk_data$PlantPro_1)] <- "Plant_Pos"
+milk_data$treatment[!is.na(milk_data$PlantCon_1)] <- "Plant_Neg"
+milk_data$treatment[!is.na(milk_data$PlantPic_1)] <- "Plant_Control"
 
-milk_data$treatment[!is.na(milk_data$DairyPro_1)] <- "DairyPro"
-milk_data$treatment[!is.na(milk_data$DairyCon_1)] <- "DairyCon"
-milk_data$treatment[!is.na(milk_data$DairyPic_1)] <- "Dairy_control"
-milk_data$treatment[!is.na(milk_data$PlantPro_1)] <- "PlantPro"
-milk_data$treatment[!is.na(milk_data$PlantCon_1)] <- "PlantCon"
-milk_data$treatment[!is.na(milk_data$PlantPic_1)] <- "Plant_control"
+milk_data$treatment[!is.na(milk_data$DairyPro_1)] <- "Dairy_Pos"
+milk_data$treatment[!is.na(milk_data$DairyCon_1)] <- "Dairy_Neg"
+milk_data$treatment[!is.na(milk_data$DairyPic_1)] <- "Dairy_Control"
+milk_data$treatment[!is.na(milk_data$PlantPro_1)] <- "Plant_Pos"
+milk_data$treatment[!is.na(milk_data$PlantCon_1)] <- "Plant_Neg"
+milk_data$treatment[!is.na(milk_data$PlantPic_1)] <- "Plant_Control"
 
 # making a cokumn for only dairy/non dairy treatment
 milk_data$milk_type[!is.na(milk_data$DairyPro_1)] <- "Dairy"
@@ -92,18 +92,18 @@ milk_data$milk_type[!is.na(milk_data$PlantCon_1)] <- "Plant"
 milk_data$milk_type[!is.na(milk_data$PlantPic_1)] <- "Plant"
 
 # making column for pos/neg/neutral treatment
-milk_data$ad_type[!is.na(milk_data$DairyPro_1)] <- "Pro"
-milk_data$ad_type[!is.na(milk_data$DairyCon_1)] <- "Con"
+milk_data$ad_type[!is.na(milk_data$DairyPro_1)] <- "Positive"
+milk_data$ad_type[!is.na(milk_data$DairyCon_1)] <- "Negative"
 milk_data$ad_type[!is.na(milk_data$DairyPic_1)] <- "Control"
-milk_data$ad_type[!is.na(milk_data$PlantPro_1)] <- "Pro"
-milk_data$ad_type[!is.na(milk_data$PlantCon_1)] <- "Con"
+milk_data$ad_type[!is.na(milk_data$PlantPro_1)] <- "Positive"
+milk_data$ad_type[!is.na(milk_data$PlantCon_1)] <- "Negative"
 milk_data$ad_type[!is.na(milk_data$PlantPic_1)] <- "Control"
 
-milk_data$ad_type[!is.na(milk_data$DairyPro_1)] <- "Pro"
-milk_data$ad_type[!is.na(milk_data$DairyCon_1)] <- "Con"
+milk_data$ad_type[!is.na(milk_data$DairyPro_1)] <- "Positive"
+milk_data$ad_type[!is.na(milk_data$DairyCon_1)] <- "Negative"
 milk_data$ad_type[!is.na(milk_data$DairyPic_1)] <- "Control"
-milk_data$ad_type[!is.na(milk_data$PlantPro_1)] <- "Pro"
-milk_data$ad_type[!is.na(milk_data$PlantCon_1)] <- "Con"
+milk_data$ad_type[!is.na(milk_data$PlantPro_1)] <- "Positive"
+milk_data$ad_type[!is.na(milk_data$PlantCon_1)] <- "Negative"
 milk_data$ad_type[!is.na(milk_data$PlantPic_1)] <- "Control"
 ```
 
