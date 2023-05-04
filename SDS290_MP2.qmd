@@ -24,7 +24,7 @@ The independent variables (experimental factors) in our study are categorical va
 
 [**Load Data:**]{.underline}
 
-```{r, LOADPKGE, warning=F, message=F, echo=FALSE}
+```{r, LOADPKGE, warning=F, message=F}
 library(tidyverse)
 library(rio)
 library(asbio)
