@@ -6,18 +6,17 @@ editor: visual
   markdown: 
     wrap: 72
 date: "`r Sys.Date()`"
-indent: true
 ---
 
 ## Introduction
 
 The dairy industry is a cornerstone of the United State's agricultural domain, even going as far as being the state drink for twenty-two out of thirty states with official state beverages (Davis, 2021); however, over the last decade or so, dairy farmers and corporations have struggled to maintain a strong clientele. This change in the industry is predominantly due to the increase in alternative milk options, like almond milk and oat milk, and varying beliefs about the health benefits of dairy milk and human consumption. An article published by the New York Times in April 2023 further discusses this generational change and the impact this change has on a historically prosperous industry (Severson, 2023). There is a changing trend in the processing and manufacturing of dairy products that relies on static consumption. In particular, there is an expansion and growth in the dairy consumption of physical products. Individuals are eating more dairy-based products than drinking dairy-based products (Durrow, 2023).
 
-This study is interested in how different ad contents (dairy vs oat milk) and sentiment types (positive, negative, and neutral ads) influence people's consumption of dairy or plant-based products. The two types of milk are whole milk and oat milk, as well as health benefits/cons regarding the milk type. The article that inspired the study emphasizes that there are many misconceptions by the younger generations pertaining to the health benefits of dairy products, like milk being less healthy than alternatives (Severson, 2023). Therefore, we hypothesize that the alternative hypothesis that "there is at least one difference in the mean rate of participants' consumptions depending on the treatment they received" will be supported by our findings, rejecting the null hypothesis that "there is no difference in the mean rate of participants' consumption depending on the treatment they received."
+This study is interested in how different ad contents (dairy vs oat milk) and sentiment types (positive, negative, and neutral ads) influence people's consumption of dairy or plant-based products. The two types of milk are whole milk and oat milk, as well as health benefits/cons regarding the milk type. The article that inspired the study emphasizes that there are many misconceptions by the younger generations pertaining to the health benefits of dairy products, like milk being less healthy than alternatives (Severson, 2023). Therefore, we hypothesize that the alternative hypothesis that "there is at least one difference in the mean rate of participants' consumption depending on the treatment they received" will be supported by our findings, rejecting the null hypothesis that "there is no difference in the mean rate of participants' consumption depending on the treatment they received."
 
 ## Methodology
 
-Our project's experimental units consisted of thirty-five Smith College students. The study was a Qualtrics online survey that was distributed via an online link to current Smith stdents, predominantly from SDS 290. Due to this, the sample is a convenience sample, as those who took the survey came majority from our Research Design and Analysis class, other classes, and some of our student organizations on campus. Because the respondents came from a very specific demographic, we cannot generalize results to the Smith population. If random sampling was used, then, we would have been able to generalize to Smithies. 
+Our project's experimental units consisted of thirty-five Smith College students. The study was a Qualtrics online survey that was distributed via an online link to current Smith students, predominantly from SDS 290. Due to this, the sample is a convenience sample, as those who took the survey came majority from our Research Design and Analysis class, other classes, and some of our student organizations on campus. Because the respondents came from a very specific demographic, we cannot generalize results to the Smith population. If random sampling was used, then, we would have been able to generalize to Smithies. 
 
 Since participants were randomly assigned to the treatments, this study is an experiment. The two treatments are milk type and advertisement type. Participants were first assigned to either receive a dairy or plant based milk photo. Then, random assignment was used again and participants were either assigned to the positive, negative, or neutral group in respect to sentiment type. The type of sentiments were either positive or negative, and were presented through two bullet points for the product. The neutral group contains no bullet points, just the photo of the product.
 
@@ -203,4 +202,16 @@ r_interaction
 
 The interaction explains 5.96% of the variability in the participants average consumption of dairy or plant based products.
 
+## Additional Analyses
+
+[**Lactose Intolerant:**]{.underline}
+
+[**Vegan or Not:**]{.underline}
+
 ## Conclusion
+
+Throughout this experimental design, we investigated how different ad contents (dairy vs oat milk) and sentiment types (positive, negative, and neutral ads) influence people's consumption of dairy or plant-based products. We ran a two-way ANOVA via an interaction model to assess if there are main effects for the ad type and milk type, and whether there was an interaction between the impacts of both experimental factors on the mean rate of participant's consumption of the milk product. We do not have statistically significant evidence that mean rate of participant's consumption differs based on neither ad type nor milk type. Therefore both experimental factors do not have a main effect.
+
+The interaction model demonstrates that we do not have statistically significant evidence that the effect of ad type on the mean rate of participant's consumptionis different based on the effect of milk type, and vice versa. Additionally, the effect of milk type on the mean rate of participant's consumption is not different based on the effect of ad type. We do not have statistically significant evidence that an interaction exists between the ad type and milk type.
+
+However, there are numerous reasons why we cannot accept these results as conclusive takeaways.
