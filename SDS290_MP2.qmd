@@ -51,7 +51,7 @@ The box-plot below shows us the distribution of the average consumption on the d
 
 By looking at the plot, we can see that the constant variance condition is also violated. We see that we do not have constant variance across groups. However, checking conditions with visualizations can be tricky, so we can refer to Levene's test to also check our constant variance condition.
 
-```{r, BOXPLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, BOXPLOT, warning=F, message=F, fig.height = 5, fig.width = 6, fig.align = "center", echo=FALSE}
 #BOX PLOT (constant variance)
 milk_means <-
   ggplot(data=milk_df1, aes(x=average_consumption, y=treatment)) + 
@@ -220,7 +220,7 @@ So for our model, the ad type, milk type, and interaction explain 9.09 % of the 
 
 The bar chart demonstrates that there were more participants that are not lactose intolerant, than lactose intolerant. Therefore, although we accounted for this confounding variable pre-survey, we would need to do further investigations to understand if there is any effect on average consumption depending on the whether the participant is lactose intolerant.
 
-```{r, LACTOSEINTOLERANT-PLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, LACTOSEINTOLERANT-PLOT, warning=F, message=F, fig.height = 5, fig.width = 6, fig.align = "center", echo=FALSE}
 lactose_plot  <- 
   ggplot(data=milk_df1, aes(x=lactose_intolerant, y=average_consumption, fill=treatment)) + 
   geom_bar(stat="identity", width=.5) + scale_fill_brewer(palette = "Pastel1") +
@@ -237,7 +237,7 @@ lactose_plot
 
 The second bar chart shows that all students that responded to the survey were not vegan, so we have not further tested this confound.
 
-```{r, VEGAN-PLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, VEGAN-PLOT, warning=F, message=F, fig.height = 5, fig.width = 6, fig.align = "center", echo=FALSE}
 lactose_plot  <- 
   ggplot(data=milk_df1, aes(x=vegan, y=average_consumption)) + 
   geom_bar(stat="identity", width=.5, fill="steelblue3") + 
