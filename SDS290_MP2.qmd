@@ -195,7 +195,7 @@ The bar chart demonstrates that there were more participants that are not lactos
 ```{r, LACTOSEINTOLERANT-PLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 lactose_plot  <- 
   ggplot(data=milk_df1, aes(x=lactose_intolerant, y=average_consumption, fill=treatment)) + 
-  geom_bar(stat="identity", width=.5) + 
+  geom_bar(stat="identity", width=.5) + scale_fill_brewer(palette = "Pastel1")
   labs(title="Consumer Likelihood Bar Chart", 
        subtitle="Assessing the Role of Lactose Intolerance", 
        caption="source: Qualtrics Milk Data") + 
@@ -220,7 +220,7 @@ lactose_plot
 
 ## Conclusion
 
-Throughout this experimental design, we investigated how different ad contents (dairy vs oat milk) and sentiment types (positive, negative, and neutral ads) influence people's consumption of dairy or plant-based products. We hypothesized that there would be at least one different mean rate of participant's consumption on the 1-5 Likert scale based on the ad content and milk type. We supported the alternative hypothesis because in the NYT article that stated that Gen Z has the misconception that dairy milk is unhealthy (Severson, 2023).
+Throughout this experimental design, we investigated how different ad contents (dairy vs oat milk) and sentiment types (positive, negative, and neutral ads) influence people's consumption of dairy or plant-based products. We hypothesized that there would be at least one different mean rate of participant's consumption on the 1-5 ordinal scale based on the ad content and milk type. We supported the alternative hypothesis because in the NYT article that stated that Gen Z has the misconception that dairy milk is unhealthy (Severson, 2023).
 
 We ran a two-way ANOVA via an interaction model to assess if there are main effects for the ad type and milk type, and whether there was an interaction between the impacts of both experimental factors on the mean rate of participant's consumption of the milk product. We do not have statistically significant evidence that mean rate of participant's consumption differs based on neither ad type nor milk type. Therefore both experimental factors do not have a main effect.
 
