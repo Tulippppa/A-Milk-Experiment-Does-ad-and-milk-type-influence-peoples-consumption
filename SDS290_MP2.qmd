@@ -22,9 +22,7 @@ The independent variables (experimental factors) in our study are categorical va
 
 ## Results
 
-[**Load Data:**]{.underline}
-
-```{r, LOADPKGE, warning=F, message=F}
+```{r, LOADPKGE, warning=F, message=F, echo=FALSE}
 library(tidyverse)
 library(rio)
 library(asbio)
@@ -191,7 +189,7 @@ So for our model, the ad type, milk type, and interaction explain 9.09 % of the 
 
 [**Lactose Intolerant:**]{.underline}
 
-The bar chart demonstrates that there were more participants that are not lactose intolerant, than lactose intolerant. Therefore, although we accounted for this confounding variable pre-survey, the responses indicate that being lactose intolerant did not significantly impact our responses due less than half of students identifying with this.
+The bar chart demonstrates that there were more participants that are not lactose intolerant, than lactose intolerant. Therefore, although we accounted for this confounding variable pre-survey, we cannot draw
 
 ```{r, LACTOSEINTOLERANT-PLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 lactose_plot  <- 
