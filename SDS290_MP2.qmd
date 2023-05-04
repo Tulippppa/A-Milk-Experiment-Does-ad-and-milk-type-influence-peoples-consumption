@@ -205,14 +205,32 @@ The interaction explains 5.96% of the variability in the participants average co
 
 [**Lactose Intolerant:**]{.underline}
 
+The bar chart demonstrates that there were more participants that are not lactose intolerant, than lactose intolerant. Therefore, although we accounted for this confounding variable pre-survey, the responses indicate that being lactose intolerant did not significantly impact our responses due less than half of students identifying with this.
+
 ```{r, LACTOSEINTOLERANT-PLOT, warning=F, message=F, echo=FALSE}
-#lactose_plot <- ggplot(milk_df1, aes(y=__, x=__, color=__)) + geom_point()
+lactose_plot  <- 
+  ggplot(data=milk_df1, aes(x=lactose_intolerant, y=average_consumption)) + 
+  geom_bar(stat="identity", width=.5, fill="steelblue3") + 
+  labs(title="Consumer Likelihood Bar Chart", 
+       subtitle="Assessing the Role of Lactose Intolerance", 
+       caption="source: Qualtrics Milk Data") + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+lactose_plot 
 ```
 
 [**Vegan or Not:**]{.underline}
 
-```{r, VEGAN-PLOT, warning=F, message=F, echo=FALSE}
+The second bar chart shows that all students that responded to the survey were not vegan, so this is not a significant confounding variable impacting our results.
 
+```{r, VEGAN-PLOT, warning=F, message=F, echo=FALSE}
+lactose_plot  <- 
+  ggplot(data=milk_df1, aes(x=vegan, y=average_consumption)) + 
+  geom_bar(stat="identity", width=.5, fill="steelblue3") + 
+  labs(title="Consumer Likelihood Bar Chart", 
+       subtitle="Assessing the Role of Veganism", 
+       caption="source: Qualtrics Milk Data") + 
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+lactose_plot 
 ```
 
 ## Conclusion
@@ -221,6 +239,6 @@ Throughout this experimental design, we investigated how different ad contents (
 
 We ran a two-way ANOVA via an interaction model to assess if there are main effects for the ad type and milk type, and whether there was an interaction between the impacts of both experimental factors on the mean rate of participant's consumption of the milk product. We do not have statistically significant evidence that mean rate of participant's consumption differs based on neither ad type nor milk type. Therefore both experimental factors do not have a main effect.
 
-The interaction model demonstrates that we do not have statistically significant evidence that the effect of ad type on the mean rate of participant's consumptionis different based on the effect of milk type, and vice versa. Additionally, the effect of milk type on the mean rate of participant's consumption is not different based on the effect of ad type. We do not have statistically significant evidence that an interaction exists between the ad type and milk type.
+The interaction model demonstrates that we do not have statistically significant evidence that the effect of ad type on the mean rate of participant's consumption is different based on the effect of milk type, and vice versa. Additionally, the effect of milk type on the mean rate of participant's consumption is not different based on the effect of ad type. We do not have statistically significant evidence that an interaction exists between the ad type and milk type.
 
 However, there are numerous reasons why we cannot accept these results as conclusive takeaways. Firstly, our data violates the constant variance and normality condition for the ANOVA model. Another limitation of our results is that we have yet to collect our data via random sampling to generalize our results.
