@@ -30,6 +30,7 @@ library(dplyr)
 library(ggplot2)
 library(Stat2Data)
 library(car)
+library(RColorBrewer)
 
 milk_df1 <- import("milk_cleaned_data.csv")
 
