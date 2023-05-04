@@ -3,8 +3,6 @@ title: "MP2 Technical Report: "
 author: "Katy Cummings, Tulip Daaboul, Michel Ruiz-Fuentes"
 format: pdf
 editor: visual
-  markdown: 
-    wrap: 72
 date: "`r Sys.Date()`"
 ---
 
