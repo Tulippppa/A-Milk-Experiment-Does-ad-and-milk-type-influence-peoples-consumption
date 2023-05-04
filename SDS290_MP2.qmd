@@ -179,27 +179,13 @@ The output above shows us descriptive statistics of our milk data, and we can us
 
 Here, we see our different R squared values. An R squared value tells us the proportion of the variance in the dependent variable that can be explained by our independent variable. It tells us how well our data fits the model.
 
-```{r, RSQUARED1, warning=F, message=F, echo=FALSE}
+```{r, RSQUARED, warning=F, message=F, echo=FALSE}
 summary(milk_anova) 
-r_ad<- 1.70/48.98
-r_ad
+r_squared <-  (1.70 + 0.28 + 2.92)/ (1.70 + 0.28 + 2.92 + 48.98)
+r_squared
 ```
 
-So for our model, the ad type explains 3.47% of the variability in the participants average consumption of dairy or plant based products.
-
-```{r, RSQUARED2, warning=F, message=F, echo=FALSE}
-r_milk<-0.28/48.98
-r_milk
-```
-
-The type of milk (dairy or oat) explains 0.57% of the variability in the participants average consumption of dairy or plant based products.
-
-```{r, RSQUARED3, warning=F, message=F, echo=FALSE}
-r_interaction<-2.92/48.98 
-r_interaction
-```
-
-The interaction explains 5.96% of the variability in the participants average consumption of dairy or plant based products.
+So for our model, the ad type, milk type, and interaction explain 9.09 % of the variability in the participants average consumption of dairy or plant based products.
 
 ## Additional Analyses
 
