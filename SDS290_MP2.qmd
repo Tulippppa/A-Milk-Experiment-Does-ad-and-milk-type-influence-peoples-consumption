@@ -51,7 +51,7 @@ The box-plot below shows us the distribution of the average consumption on the d
 
 By looking at the plot, we can see that the constant variance condition is also violated. We see that we do not have constant variance across groups. However, checking conditions with visualizations can be tricky, so we can refer to Levene's test to also check our constant variance condition.
 
-```{r, BOXPLOT, warning=F, message=F, fig.height = 5, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, BOXPLOT, warning=F, message=F, fig.height = 4, fig.width = 6, fig.align = "center", echo=FALSE}
 #BOX PLOT (constant variance)
 milk_means <-
   ggplot(data=milk_df1, aes(x=average_consumption, y=treatment)) + 
