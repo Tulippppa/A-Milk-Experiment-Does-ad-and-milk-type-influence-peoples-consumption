@@ -6,13 +6,15 @@ editor: visual
 date: "`r Sys.Date()`"
 ---
 
-## Introduction
+# Introduction
 
 The dairy industry is a cornerstone of the United State's agricultural domain, even going as far as being the state drink for twenty-two out of thirty states with official state beverages (Davis, 2021); however, over the last decade or so, dairy farmers and corporations have struggled to maintain a strong clientele. This change in the industry is predominantly due to the increase in alternative milk options, like almond milk and oat milk, and varying beliefs about the health benefits of dairy milk and human consumption. An article published by the New York Times in April 2023 further discusses this generational change and the impact this change has on a historically prosperous industry (Severson, 2023). There is a changing trend in the processing and manufacturing of dairy products that relies on static consumption. In particular, there is an expansion and growth in the dairy consumption of physical products. Individuals are eating more dairy-based products than drinking dairy-based products (Durrow, 2023).
 
 This study is interested in how different ad type and milk type influence people's consumption of dairy or plant-based products. The two levels of milk are whole milk and oat milk. There are three levels of ad type- health benefits, cons, or no notes about it. The article that inspired the study emphasizes that there are many misconceptions by the younger generations pertaining to the health benefits of dairy products, like milk being less healthy than alternatives (Severson, 2023). Therefore, we hypothesize that the alternative hypothesis that "there is at least one difference in the mean rate of participants' consumption depending on the treatment they received" will be supported by our findings, rejecting the null hypothesis that "there is no difference in the mean rate of participants' consumption depending on the treatment they received."
 
-## Methodology
+\newpage
+
+# Methodology
 
 Our project's experimental units consisted of thirty-five Smith College students. The study was a Qualtrics online survey that was distributed via an online link to current Smith students, predominantly from SDS 290. Due to this, the sample is a convenience sample, as those who took the survey came majority from our Research Design and Analysis class, other classes, and some of our student organizations on campus. Because the respondents came from a very specific demographic, we cannot generalize results to the Smith population. If random sampling was used, then, we would have been able to generalize to Smithies. 
 
@@ -20,7 +22,11 @@ Since participants were randomly assigned to the treatments, this study is an ex
 
 The independent variables (experimental factors) in our study are categorical variables of milk type (two levels: whole or oat) and sentiment type (three levels: positive, negative, neutral). The dependent variable was average consumption, which is continuous. After being asked simple demographic questions, participants were asked if they were vegan or lactose intolerant. After seeing their treatment, participants rated on an ordinal scale from 1-5 (1 being least likely, 5 being most likely) on how many times a week they consume the type of milk they were shown. After completing this portion, participants rated on an ordinal scale their opinion on the dairy industry (1- dislike a great deal, 5 like a great deal). The purpose of the pre and post survey questions is to control for potential confounding variables. For our study, we are going to be using a two way ANOVA model to see if there is a true difference in average consumption based on ad contents and sentiment types. 
 
-## Results
+![Treaments Table](mp2_treatments.jpg)
+
+\newpage
+
+# Results
 
 ```{r, LOADPKGE, warning=F, message=F, echo=FALSE}
 library(tidyverse)
@@ -186,7 +192,7 @@ r_squared
 
 So for our model, the ad type, milk type, and interaction explain 9.09 % of the variability in the participants average consumption of dairy or plant based products.
 
-## Additional Analyses
+# Additional Analyses
 
 [**Lactose Intolerant:**]{.underline}
 
@@ -218,7 +224,7 @@ lactose_plot  <-
 lactose_plot 
 ```
 
-## Conclusion
+# Conclusion
 
 Throughout this experimental design, we investigated how different ad contents (dairy vs oat milk) and sentiment types (positive, negative, and neutral ads) influence people's consumption of dairy or plant-based products. We hypothesized that there would be at least one different mean rate of participant's consumption on the 1-5 ordinal scale based on the ad content and milk type. We supported the alternative hypothesis because in the NYT article that stated that Gen Z has the misconception that dairy milk is unhealthy (Severson, 2023).
 
