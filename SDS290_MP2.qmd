@@ -207,7 +207,15 @@ The interaction explains 5.96% of the variability in the participants average co
 
 [**Lactose Intolerant:**]{.underline}
 
+```{r, LACTOSEINTOLERANT-PLOT, warning=F, message=F, echo=FALSE}
+#lactose_plot <- ggplot(milk_df1, aes(y=__, x=__, color=__)) + geom_point()
+```
+
 [**Vegan or Not:**]{.underline}
+
+```{r, VEGAN-PLOT, warning=F, message=F, echo=FALSE}
+
+```
 
 ## Conclusion
 
