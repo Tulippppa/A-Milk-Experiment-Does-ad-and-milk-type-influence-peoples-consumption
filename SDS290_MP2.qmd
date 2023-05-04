@@ -10,7 +10,7 @@ date: "`r Sys.Date()`"
 
 The dairy industry is a cornerstone of the United State's agricultural domain, even going as far as being the state drink for twenty-two out of thirty states with official state beverages (Davis, 2021); however, over the last decade or so, dairy farmers and corporations have struggled to maintain a strong clientele. This change in the industry is predominantly due to the increase in alternative milk options, like almond milk and oat milk, and varying beliefs about the health benefits of dairy milk and human consumption. An article published by the New York Times in April 2023 further discusses this generational change and the impact this change has on a historically prosperous industry (Severson, 2023). There is a changing trend in the processing and manufacturing of dairy products that relies on static consumption. In particular, there is an expansion and growth in the dairy consumption of physical products. Individuals are eating more dairy-based products than drinking dairy-based products (Durrow, 2023).
 
-This study is interested in how different ad type and milk type influence people's consumption of dairy or plant-based products. The two levels of milk are whole milk and oat milk. There are three levels of ad type- health benefits, cons, or no notes about it. The article that inspired the study emphasizes that there are many misconceptions by the younger generations pertaining to the health benefits of dairy products, like milk being less healthy than alternatives (Severson, 2023). Therefore, we hypothesize that the alternative hypothesis that "there is at least one difference in the mean rate of participants' consumption depending on the treatment they received" will be supported by our findings, rejecting the null hypothesis that "there is no difference in the mean rate of participants' consumption depending on the treatment they received."
+Our study is interested in how different ad type and milk type influence people's consumption of dairy or plant-based products. The article that inspired the study emphasizes that there are many misconceptions by the younger generations pertaining to the health benefits of dairy products, like milk being less healthy than alternatives (Severson, 2023). Therefore, we hypothesize that the alternative hypothesis that "there is at least one difference in the mean rate of participants' consumption depending on the treatment they received" will be supported by our findings, rejecting the null hypothesis that "there is no difference in the mean rate of participants' consumption depending on the treatment they received."
 
 \newpage
 
@@ -18,9 +18,9 @@ This study is interested in how different ad type and milk type influence people
 
 Our project's experimental units consisted of thirty-five Smith College students. The study was a Qualtrics online survey that was distributed via an online link to current Smith students, predominantly from SDS 290. Due to this, the sample is a convenience sample, as those who took the survey came majority from our Research Design and Analysis class, other classes, and some of our student organizations on campus. Because the respondents came from a very specific demographic, we cannot generalize results to the Smith population. If random sampling was used, then, we would have been able to generalize to Smithies. 
 
-Since participants were randomly assigned to the treatments, this study is an experiment. The two treatments are milk type and advertisement type. Participants were first assigned to either receive a dairy or plant based milk photo. Then, random assignment was used again and participants were either assigned to the positive, negative, or neutral group in respect to ad type. The type of ad were either positive or negative, and were presented through two bullet points for the product. The neutral group contains no bullet points, just the photo of the product.
+Since participants were randomly assigned to the treatments, this study is an experiment. The two treatments are milk type and ad type. Participants were first assigned to either receive a dairy or plant based milk photo. Then, random assignment was used again and participants were either assigned to the positive, negative, or neutral group in respect to ad type. The type of ad were either positive or negative, and were presented through two bullet points for the product. The neutral group contains no bullet points, just the photo of the product.
 
-The independent variables (experimental factors) in our study are categorical variables of milk type (two levels: whole or oat) and ad type (three levels: positive, negative, neutral). The dependent variable was average consumption, which is continuous. After being asked simple demographic questions, participants were asked if they were vegan or lactose intolerant. After seeing their treatment, participants rated on an ordinal scale from 1-5 (1 being least likely, 5 being most likely) on how many times a week they consume the type of milk they were shown. After completing this portion, participants rated on an ordinal scale their opinion on the dairy industry (1- dislike a great deal, 5 like a great deal). The purpose of the pre and post survey questions is to control for potential confounding variables. For our study, we are going to be using a two way ANOVA model to see if there is a true difference in average consumption based on milk type and ad type. 
+The independent variables (experimental factors) in our study are categorical variables of milk type (two levels: whole or oat) and ad type (three levels: positive, negative, or no facts on the milk). The dependent variable was average consumption, which is continuous. After being asked simple demographic questions, participants were asked if they were vegan or lactose intolerant. After seeing their treatment, participants rated on an ordinal scale from 1-5 (1 being least likely, 5 being most likely) on how many times a week they consume the type of milk they were shown. After completing this portion, participants rated on an ordinal scale their opinion on the dairy industry (1- dislike a great deal, 5 like a great deal). The purpose of the pre and post survey questions is to control for potential confounding variables. For our study, we are going to be using a two way ANOVA model to see if there is a true difference in average consumption based on milk type and ad type. 
 
 ![Treaments Table](mp2_treatments.jpg)
 
@@ -47,7 +47,9 @@ milk_df1$treatment <- as.factor(milk_df1$treatment)
 
 [**Condition Check 1 Symmetrical Distribution around Group Means**]{.underline}:
 
-The box-plot below shows us the distribution of the average consumption on the different treatment combinations. We will compare the variation in the interquartile ranges of each treatment By looking at the plot, we can see that the constant variance condition is violated. We see that we do not have constant variance across groups and that the spread is not normal. However, checking conditions with visualizations can be tricky, so we can refer to Levene's test to also check our constant variance condition.
+The box-plot below shows us the distribution of the average consumption on the different treatment combinations. We will compare the variation in the interquartile ranges of each treatment. We can see that this condition is violated, when looking at our Dairy_Control group the distribution is skewed and not normal. When looking for outliers, we can see that the Dairy_Pos group has outliers skewing our distribution . These two conditions are violated.
+
+By looking at the plot, we can see that the constant variance condition is also violated. We see that we do not have constant variance across groups. However, checking conditions with visualizations can be tricky, so we can refer to Levene's test to also check our constant variance condition.
 
 ```{r, BOXPLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 #BOX PLOT (constant variance)
@@ -81,7 +83,7 @@ The Tukey Non-Additivity plot model helps us understand the relationship between
 
 To diagnose the type of transformation we subtract 1-slope or 1-2.7 which gives the difference of -1.7. Because our P=-1.7, we must use a reciprocals transformation of 1/y.
 
-```{r, TUKEYNA, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, TUKEYNA, warning=F, message=F, fig.height = 5, fig.width = 6, fig.align = "center", echo=FALSE}
 TukeyNonaddPlot (average_consumption ~ ad_type + milk_type, data=milk_df1)
 ```
 
@@ -94,7 +96,7 @@ After transforming our data, we see that although we are getting closer to that 
 milk_df1$average_consumption_transformed <- (1/milk_df1$average_consumption)
 ```
 
-```{r, TUKEY-TRANSFORMED, warning=F, message=F, echo=FALSE}
+```{r, TUKEY-TRANSFORMED, message=F, fig.height = 5, fig.width = 6, fig.align = "center", echo=FALSE}
 TukeyNonaddPlot (average_consumption_transformed ~ ad_type + milk_type, data=milk_df1)
 ```
 
@@ -102,13 +104,13 @@ TukeyNonaddPlot (average_consumption_transformed ~ ad_type + milk_type, data=mil
 
 [**Two-Way ANOVA Model**]{.underline}:
 
-The interaction model above shows us whether we have main effects for aD type, milk type, and if we have an interaction present.
+The interaction model above shows us whether we have main effects for ad type, milk type, and if we have an interaction present.
 
 Because our p-value for ad_type is 0.609 (greater than 0.05), we do not have statistically significant evidence that average consumption is different based on ad type. We do not have a main effect for ad type.
 
 Because our p-value for milk_type is 0.686 (greater than 0.05), we do not have statistically significant evidence that average consumption is different based on milk type. We do not have a main effect for milk type.
 
-When looking at our interaction effect, we see a p-value of 0.431. Because out p-value is greater than 0.431, we do not have statistically significant evidence that the effect of ad type is different based on the effect of milk type. We do not have statistically significant evidence that an interaction exists.
+When looking at our interaction effect, we see a p-value of 0.431. Because our p-value is greater than 0.431, we do not have statistically significant evidence that the effect of ad type is different based on the effect of milk type. We do not have statistically significant evidence that an interaction exists.
 
 ```{r, ANOVA, warning=F, message=F, echo=FALSE}
 milk_anova <- aov(average_consumption~ad_type*milk_type, data=milk_df1) 
@@ -121,7 +123,7 @@ summary(milk_anova)
 
 The residuals versus fitted plot can help us asses two patterns: non-linearity and non-constant spread. Because we see our residuals evenly spread out, we can say that our spread is constant. However, because our line does not fall on zero, non linearity is present here.
 
-```{r, RESVFIT1, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, RESVFIT1, warning=F, message=F, fig.height = 6, fig.width = 6, fig.align = "center", echo=FALSE}
 plot(milk_anova, which = 1)
 ```
 
@@ -129,7 +131,7 @@ plot(milk_anova, which = 1)
 
 We can use this normal quantile plot compares the standardized observed residuals with theoretical values from a normal distribution. This plot can help us determine whether our distribution is normal. Because we see that the residuals do not fall on the line, our distribution is not normal.
 
-```{r, RESVFIT2, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, RESVFIT2, warning=F, message=F, fig.height = 6, fig.width = 6, fig.align = "center", echo=FALSE}
 plot(milk_anova, which = 2)
 ```
 
@@ -139,7 +141,7 @@ plot(milk_anova, which = 2)
 
 Fishers LSD-
 
-When conducting a pairwise comparison, Fishers LSD looks at the individual false alarm rate. This means it looks at the chance of a Type 1 error for a single test. Because our alpha level is 0.05, this means that for every error, those 0.05 error rates accumulate. Therefore, the Fishers LSD is the least conservative approach, meaning it is likely to reject the null hypothesis that the means of average consumption are the same. When looking at our pairwise comparisons, we see that all of the p-values are larger than 0.05. This means we do not have statistically significant evidence that the pairwise comparisons between the treatments are different using Fishers LSD.
+When conducting a pairwise comparison, Fishers LSD looks at the individual false alarm rate. This means it looks at the chance of a Type 1 error for a single test. Because our alpha level is 0.05, this means that for every test, those 0.05 error rates accumulate. Therefore, the Fishers LSD is the least conservative approach, meaning it is likely to reject the null hypothesis that the means of average consumption are the same. When looking at our pairwise comparisons, we see that all of the p-values are larger than 0.05. This means we do not have statistically significant evidence that the pairwise comparisons between the treatments are different using Fishers LSD.
 
 ```{r, LSD, warning=F, message=F, echo=FALSE}
 #FISHERSLSD
@@ -177,7 +179,7 @@ milk_tukey
 
 [**Descriptive Statistics & Effect Size**]{.underline}:
 
-The output above shows us descriptive statistics of our milk data, and we can use it to calculate our effect size. To calculate effect size, we use the DairyPro (1.71) and DairyCon (1.5). This means \| 1.71-1.5 \| are divided by rad(1.6888) = 0.16. This represents a trivial effect based on Cohen's table.
+The output shows us descriptive statistics of our milk data, and we can use it to calculate our effect size. To calculate effect size, we use the DairyPro (1.71) and DairyCon (1.5). This means \| 1.71-1.5 \| are divided by rad(1.6888) = 0.16. This represents a trivial effect based on Cohen's table.
 
 ```{r, EFFECTSIZE, warning=F, message=F, echo=FALSE}
 #TREATMENT GROUP STATS
@@ -195,8 +197,8 @@ mse <- 1.6888
 SD <- sqrt(1.6888)
 effect_size <- (1.71 - 1.5) / SD
 
-mse
-SD
+#mse
+#SD
 effect_size
 ```
 
@@ -221,7 +223,7 @@ The bar chart demonstrates that there were more participants that are not lactos
 ```{r, LACTOSEINTOLERANT-PLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 lactose_plot  <- 
   ggplot(data=milk_df1, aes(x=lactose_intolerant, y=average_consumption, fill=treatment)) + 
-  geom_bar(stat="identity", width=.5) + scale_fill_brewer(palette = "Pastel1")
+  geom_bar(stat="identity", width=.5) + scale_fill_brewer(palette = "Pastel1") +
   labs(title="Consumer Likelihood Bar Chart", 
        subtitle="Assessing the Role of Lactose Intolerance", 
        caption="source: Qualtrics Milk Data") + 
@@ -248,8 +250,8 @@ lactose_plot
 
 # Conclusion
 
-Throughout this experimental design, we investigated how different milk type (dairy vs oat) and ad types (positive, negative, and neutral ads) influence people's consumption of dairy or plant-based products. We hypothesized that there would be at least one different mean rate of participant's consumption on the 1-5 ordinal scale based on the ad type and milk type. We supported the alternative hypothesis because in the NYT article that stated that Gen Z has the misconception that dairy milk is unhealthy (Severson, 2023).
+Throughout this experimental design, we investigated how different milk type (dairy vs oat) and ad types (positive, negative, and neutral ads) influence people's consumption of dairy or plant-based products. We hypothesized that there would be at least one different average rate of participant's consumption on the 1-5 ordinal scale based on the ad type and milk type. We supported the alternative hypothesis because in the NYT article that stated that Gen Z has the misconception that dairy milk is unhealthy (Severson, 2023).
 
-We ran a two-way ANOVA via an interaction model to assess if there are main effects for the ad type and milk type, and whether there was an interaction between the impacts of both experimental factors on the mean rate of participant's consumption of the milk product. We do not have statistically significant evidence that mean rate of participant's consumption differs based on neither ad type nor milk type. Therefore both experimental factors do not have a main effect. We do not have statistically significant evidence that an interaction exists between the ad type and milk type. However, there are numerous reasons why we cannot accept these results as conclusive takeaways. Firstly, our data violates the constant variance and normality condition for the ANOVA model. Another limitation of our results is that we have yet to collect our data via random sampling to generalize our results.
+We ran a two-way ANOVA via an interaction model to assess if there are main effects for the ad type and milk type, and whether there was an interaction between the impacts of both experimental factors on the mean rate of participant's consumption of the milk product. We do not have statistically significant evidence that mean rate of participant's consumption differs based on neither ad type nor milk type. Therefore both experimental factors do not have a main effect. We do not have statistically significant evidence that an interaction exists between the ad type and milk type. However, there are numerous reasons why we cannot accept these results as conclusive takeaways. Firstly, our data violates the normality and outliers conditions for the ANOVA. Another limitation of our results is that we did not collect our data via random sampling to generalize our results.
 
 Considering our findings, we return to the New York Times article that inspired our research study and question whether or not we see the article as an accurate depiction of the downfall of milk consumption. As the article states, there is concrete evidence that the milk industry is experiencing significant decreases in profit. The article petitions that it is largely due to the generational differences, yet our findings show otherwise. Despite these differences, we believe that this trend of the industry is accurate and support the notion that it is heavily due to social changes in opinions around milk and its benefits to one's health and the climate overall (Severson, 2023).
