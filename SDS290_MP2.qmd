@@ -21,7 +21,7 @@ Our project's experimental units consisted of thirty-five Smith College students
 
 Since participants were randomly assigned to the treatments, this study is an experiment. The two treatments are milk type and advertisement type. Participants were first assigned to either receive a dairy or plant based milk photo. Then, random assignment was used again and participants were either assigned to the positive, negative, or neutral group in respect to sentiment type. The type of sentiments were either positive or negative, and were presented through two bullet points for the product. The neutral group contains no bullet points, just the photo of the product.
 
-The independent variables (experimental factors) in our study are categorical variables of milk type (two levels: whole or oat) and sentiment type (three levels: positive, negative, neutral). The dependent variable was average consumption, which is continuous. After being asked simple demographic questions, participants were asked if they were vegan or lactose intolerant. After seeing their treatment, participants rated on an ordinal scale from 1-5 (1 being least likely, 5 being most likely) on how many times a week they consume the type of milk they were shown. After completing this portion, partitipants rated on an ordinal scale their opinion on the dairy industry (1- dislike a great deal, 5 like a great deal). The purpose of the pre and post survey questions is to control for potential confounding variables. For our study, we are going to be using a two way ANOVA model to see if there is a true difference in average consumption based on ad contents and sentiment types. 
+The independent variables (experimental factors) in our study are categorical variables of milk type (two levels: whole or oat) and sentiment type (three levels: positive, negative, neutral). The dependent variable was average consumption, which is continuous. After being asked simple demographic questions, participants were asked if they were vegan or lactose intolerant. After seeing their treatment, participants rated on an ordinal scale from 1-5 (1 being least likely, 5 being most likely) on how many times a week they consume the type of milk they were shown. After completing this portion, participants rated on an ordinal scale their opinion on the dairy industry (1- dislike a great deal, 5 like a great deal). The purpose of the pre and post survey questions is to control for potential confounding variables. For our study, we are going to be using a two way ANOVA model to see if there is a true difference in average consumption based on ad contents and sentiment types. 
 
 ## Results
 
@@ -45,9 +45,9 @@ milk_df1$treatment <- as.factor(milk_df1$treatment)
 
 [**Condition Check 1 Symmetrical Distribution around Group Means**]{.underline}:
 
-We will compare the variation in the interquartile ranges of each `treatment`. This plot demonstrates that our distribution across the six groups are not equally distributed and violate our constant variance condition.
+The box-plot below shows us the distribution of the average consumption on the different treatment combinations. We will compare the variation in the interquartile ranges of each treatment By looking at the plot, we can see that the constant variance condition is violated. We see that we do not have constant variance across groups and that the spread is not normal. However, checking conditions with visualizations can be tricky, so we can refer to Levene's test to also check our constant variance condition.
 
-```{r, CONDI02, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, BOXPLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 #BOX PLOT (constant variance)
 milk_means <-
   ggplot(data=milk_df1, aes(x=average_consumption, y=treatment)) + 
@@ -59,10 +59,7 @@ milk_means <-
   xlab("Average Consumption") +
   ylab ("Treatment") + coord_flip()
 milk_means
-
 ```
-
-The box-plot above shows us the distribution of the average consumption on the different treatments. By looking at the plot, we can see that the constant variance condition is violated. We see that we do not have constant variance across groups and that the spread is not normal. However, checking conditions with visualizations can be tricky, so we can refer to levene's test to check our constant variance condition.
 
 [**Levene's Test:**]{.underline}
 
@@ -70,24 +67,24 @@ The box-plot above shows us the distribution of the average consumption on the d
 leveneTest(average_consumption~treatment, data=milk_df1)
 ```
 
-After condicting Levene's test of homogeneity of variance, we see that our p-value of 0.5326 is greater than 0.05. This means that we do not have statistically significant evidence that we have different variances, therefor our condition is not violated.
+After conducting Levene's test of homogeneity of variance, we see that our p-value of 0.5326 is greater than 0.05. This means that we do not have statistically significant evidence that we have different variances, therefore constant variance condition is not violated. (**double check)\*\*\*\*\***
 
 [**Condition Check 2 Additive Effects & Transformation**]{.underline}:
 
-```{r, CONDI03, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, TUKEYNA, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 TukeyNonaddPlot (average_consumption ~ ad_type + milk_type, data=milk_df1)
 ```
 
-The Tukey Non-Additivity plot model helps us understand the relationship between the affect of both treatments over what we predicted. It also allows us to assess if the affects of treatments are additive or if there is some interaction. We want to relationship between the x-axis and y-axis to have a slope of 0 to indicate there is no relationship. However, because the data violates several assumptions and the slope is 2.7, so we must transform the data.
+The Tukey Non-Additivity plot model helps us understand the relationship between the affect of both treatments over what we predicted. It also allows us to assess if the affects of treatments are additive or if there is some interaction. We want the relationship between the x-axis and y-axis to have a slope of 0 to indicate there is no relationship. However, because the data violates several assumptions and the slope is 2.7, so we must transform the data.
 
 To diagnose the type of transformation we subtract 1-slope or 1-2.7 which gives the difference of -1.7. Because our P=-1.7, we must use a reciprocals transformation of 1/y.
 
-```{r, INTERPRET, warning=F, message=F, echo=FALSE}
+```{r, TRANSFORM, warning=F, message=F, echo=FALSE}
 #RECIPROCAL TRANSFORMATION
 milk_df1$average_consumption_transformed <- (1/milk_df1$average_consumption)
 ```
 
-```{r, TUKEY2, warning=F, message=F, echo=FALSE}
+```{r, TUKEY-TRANSFORMED, warning=F, message=F, echo=FALSE}
 TukeyNonaddPlot (average_consumption_transformed ~ ad_type + milk_type, data=milk_df1)
 ```
 
@@ -95,12 +92,12 @@ After transforming our data, we see that although we are getting closer to that 
 
 [**Two-Way ANOVA Model**]{.underline}:
 
-```{r, MOD01, warning=F, message=F, echo=FALSE}
+```{r, ANOVA, warning=F, message=F, echo=FALSE}
 milk_anova <- aov(average_consumption~ad_type*milk_type, data=milk_df1) 
 summary(milk_anova) 
 ```
 
-The interaction model above shows us whether we have main effects for ad type, milk type, and if we have an interaction present.
+The interaction model above shows us whether we have main effects for aD type, milk type, and if we have an interaction present.
 
 Because our p-value for ad_type is 0.609 (greater than 0.05), we do not have statistically significant evidence that average consumption is different based on ad type. We do not have a main effect for ad type.
 
@@ -110,19 +107,19 @@ When looking at our interaction effect, we see a p-value of 0.431. Because out p
 
 [**Independent residuals:**]{.underline}
 
-```{r, RESVFIT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, RESVFIT1, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 plot(milk_anova, which = 1)
 ```
 
 The residuals versus fitted plot can help us asses two patterns: non-linearity and non-constant spread. Because we see our residuals evenly spread out, we can say that our spread is constant. However, because our line does not fall on zero, non linearity is present here.
 
-```{r, RESVFIT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
+```{r, RESVFIT2, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 plot(milk_anova, which = 2)
 ```
 
 We can use this normal quantile plot compares the standardized observed residuals with theoretical values from a normal distribution. This plot can help us determine whether our distribution is normal. Because we see that the residuals do not fall on the line, our distribution is not normal.
 
-[**Confidence Intervals & Effect Size**]{.underline}:
+[**Confidence Intervals:**]{.underline}
 
 ```{r, LSD, warning=F, message=F, echo=FALSE}
 #FISHERSLSD
@@ -134,9 +131,7 @@ milk_lsd <-
 milk_lsd
 ```
 
-When conducting a pairwise comparison, a fishers lsd looks at the individual false alarm rate. This means it looks at the chance of a Type 1 error for a single test. Because our alpha level is 0.05, this means that for every error, those 0.05 error rates add up. The Fishers LSD is the least conservative, meaning it is likely to reject the null hypothesis that the means of average consumption are the same.
-
-When looking at our pairwise comparisons, we see that all of the p-values are larger than 0.05. This means we do not have statistically significant evidence that the pairwise comparisons between the treatments are different.
+When conducting a pairwise comparison, Fishers LSD looks at the individual false alarm rate. This means it looks at the chance of a Type 1 error for a single test. Because our alpha level is 0.05, this means that for every error, those 0.05 error rates accumulate. Therefore, the Fishers LSD is the least conservative approach, meaning it is likely to reject the null hypothesis that the means of average consumption are the same. When looking at our pairwise comparisons, we see that all of the p-values are larger than 0.05. This means we do not have statistically significant evidence that the pairwise comparisons between the treatments are different using Fishers LSD.
 
 ```{r, BON, warning=F, message=F, echo=FALSE}
 #BONFERONNI
@@ -148,9 +143,7 @@ milk_bonf <-
 milk_bonf
 ```
 
-The Bonferroni confidence intervals focuses on family wise fale alarm rate. Meaning we look at the 0.05 error on *all* the tests we conduct. This approach is the most conservative and least likely to reject the null hypothesis.
-
-Again, based on all of our pairwise comparisons, all of the p-values are larger than 0.05. This means we do not have statistically significant evidence that the pairwise comparisons between the treatments are different.
+The Bonferroni confidence intervals focuses on family wise false alarm rate. Meaning we look at the 0.05 error on *all* the tests we conduct and have an overall false alarm rate of 0.05. This approach is the most conservative and least likely to reject the null hypothesis. Again, based on all of our pairwise comparisons, all of the p-values are larger than 0.05. This means we do not have statistically significant evidence that the pairwise comparisons between the treatments are different using Bonferroni confidence intervals.
 
 ```{r, TUKEY, warning=F, message=F, echo=FALSE}
 #TUKEYHSD()
@@ -158,7 +151,9 @@ milk_tukey <- TukeyHSD(milk_anova)
 milk_tukey
 ```
 
-The TukeyHSD is the last pairwise comparison test that we will look at. It is somewhere in between the fishers and bonferonni. Similarly, when looking at our pairwise comparisons, we see that all of the p-values are larger than 0.05. We do not have statistically significant evidence that the pairwise comparisons between the treatments are different.
+Tukey HSD is the last pairwise comparison test that we will look at. Its level of strictness is somewhere in between Fishers LSD and Bonferonni. Similarly, when looking at our pairwise comparisons, we see that all of the p-values are larger than 0.05. We do not have statistically significant evidence that the pairwise comparisons between the treatments are different using Tukey HSD.
+
+[**Descriptive Statistics & Effect Size**]{.underline}:
 
 ```{r, EFFECTSIZE, warning=F, message=F, echo=FALSE}
 #TREATMENT GROUP STATS
@@ -172,29 +167,39 @@ milk_summary <-
             group_max= max(average_consumption))  
 milk_summary
 
-effect_size<- 1.71
+effect_size <- 1.71
+
+mse <- 1.6888 
+SD <- sqrt(1.6888)
+effectsize <- 1.71 - 1.5 / SD
+#0.555744
 ```
 
-The output above shows us descriptive statistics of our milk data. We can use it to calculate our effect size. To calculate effect size, we \| 1.71-1.5\|/ rad(1.6888) = 0.16. This represents a trivial effect.
+The output above shows us descriptive statistics of our milk data, and we can use it to calculate our effect size. To calculate effect size, we use the DairyPro (1.71) and DairyCon (1.5). This means \| 1.71-1.5\| are divided by rad(1.6888) = 0.16. This represents a trivial effect based on Cohen's table. (**double check)\*\*\*\*\***
 
 [**R-Squared:**]{.underline}
 
-```{r, RSQUARED, warning=F, message=F, echo=FALSE}
+Here, we see our different R squared values. An R squared value tells us the proportion of the variance in the dependent variable that can be explained by our independent variable. It tells us how well our data fits the model.
+
+```{r, RSQUARED1, warning=F, message=F, echo=FALSE}
 summary(milk_anova) 
 r_ad<- 1.70/48.98
-r_milk<-0.28/48.98
-r_interaction<-2.92/48.98 
-
 r_ad
-r_milk
-r_interaction
 ```
-
-Here, we see our different R squared values. An R squared value tells us the proportion of the variance in the dependent variable that can be explained by our independent variable. It tells us how well our data fits the model.
 
 So for our model, the ad type explains 3.47% of the variability in the participants average consumption of dairy or plant based products.
 
+```{r, RSQUARED2, warning=F, message=F, echo=FALSE}
+r_milk<-0.28/48.98
+r_milk
+```
+
 The type of milk (dairy or oat) explains 0.57% of the variability in the participants average consumption of dairy or plant based products.
+
+```{r, RSQUARED3, warning=F, message=F, echo=FALSE}
+r_interaction<-2.92/48.98 
+r_interaction
+```
 
 The interaction explains 5.96% of the variability in the participants average consumption of dairy or plant based products.
 
