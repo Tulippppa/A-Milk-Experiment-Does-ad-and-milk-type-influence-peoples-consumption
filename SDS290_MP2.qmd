@@ -189,12 +189,12 @@ So for our model, the ad type, milk type, and interaction explain 9.09 % of the 
 
 [**Lactose Intolerant:**]{.underline}
 
-The bar chart demonstrates that there were more participants that are not lactose intolerant, than lactose intolerant. Therefore, although we accounted for this confounding variable pre-survey, we cannot draw
+The bar chart demonstrates that there were more participants that are not lactose intolerant, than lactose intolerant. Therefore, although we accounted for this confounding variable pre-survey, we would need to
 
 ```{r, LACTOSEINTOLERANT-PLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 lactose_plot  <- 
-  ggplot(data=milk_df1, aes(x=lactose_intolerant, y=average_consumption)) + 
-  geom_bar(stat="identity", width=.5, fill="steelblue3") + 
+  ggplot(data=milk_df1, aes(x=lactose_intolerant, y=average_consumption, fill=treatment)) + 
+  geom_bar(stat="identity", width=.5) + 
   labs(title="Consumer Likelihood Bar Chart", 
        subtitle="Assessing the Role of Lactose Intolerance", 
        caption="source: Qualtrics Milk Data") + 
@@ -204,7 +204,7 @@ lactose_plot
 
 [**Vegan or Not:**]{.underline}
 
-The second bar chart shows that all students that responded to the survey were not vegan, so this is not a significant confounding variable impacting our results.
+The second bar chart shows that all students that responded to the survey were not vegan, so we have not further tested this confound.
 
 ```{r, VEGAN-PLOT, warning=F, message=F, fig.height = 3, fig.width = 6, fig.align = "center", echo=FALSE}
 lactose_plot  <- 
