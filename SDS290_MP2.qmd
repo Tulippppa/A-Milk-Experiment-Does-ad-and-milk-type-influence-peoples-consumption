@@ -66,7 +66,7 @@ milk_means
 leveneTest(average_consumption~treatment, data=milk_df1)
 ```
 
-After conducting Levene's test of homogeneity of variance, we see that our p-value of 0.5326 is greater than 0.05. This means that we do not have statistically significant evidence that we have different variances, therefore constant variance condition is not violated. (**double check)\*\*\*\*\***
+After conducting Levene's test of homogeneity of variance, we see that our p-value of 0.5326 is greater than 0.05. This means that we do not have statistically significant evidence that we have different variances, therefore constant variance condition is not violated.
 
 [**Condition Check 2 Additive Effects & Transformation**]{.underline}:
 
@@ -166,15 +166,16 @@ milk_summary <-
             group_max= max(average_consumption))  
 milk_summary
 
-effect_size <- 1.71
-
 mse <- 1.6888 
 SD <- sqrt(1.6888)
-effectsize <- 1.71 - 1.5 / SD
-#0.555744
+effect_size <- (1.71 - 1.5) / SD
+
+mse
+SD
+effect_size
 ```
 
-The output above shows us descriptive statistics of our milk data, and we can use it to calculate our effect size. To calculate effect size, we use the DairyPro (1.71) and DairyCon (1.5). This means \| 1.71-1.5\| are divided by rad(1.6888) = 0.16. This represents a trivial effect based on Cohen's table. (**double check)\*\*\*\*\***
+The output above shows us descriptive statistics of our milk data, and we can use it to calculate our effect size. To calculate effect size, we use the DairyPro (1.71) and DairyCon (1.5). This means \| 1.71-1.5 \| are divided by rad(1.6888) = 0.16. This represents a trivial effect based on Cohen's table.
 
 [**R-Squared:**]{.underline}
 
@@ -214,4 +215,4 @@ Throughout this experimental design, we investigated how different ad contents (
 
 The interaction model demonstrates that we do not have statistically significant evidence that the effect of ad type on the mean rate of participant's consumptionis different based on the effect of milk type, and vice versa. Additionally, the effect of milk type on the mean rate of participant's consumption is not different based on the effect of ad type. We do not have statistically significant evidence that an interaction exists between the ad type and milk type.
 
-However, there are numerous reasons why we cannot accept these results as conclusive takeaways.
+However, there are numerous reasons why we cannot accept these results as conclusive takeaways. Firstly, our data violates the constant variance and normality condition for the ANOVA model. Another limitation of our results is that we have yet to collect our data via random sampling to draw population inferences since our participants were only from SDS 290.
